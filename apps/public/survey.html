@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>ffSurvey</title>
+  
+  <link rel='stylesheet' href="css/reset.css">
 
-  <link rel="stylesheet" 
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/68vbdEjh4u" 
-  crossorigin="anonymous"
-  >
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+  rel="stylesheet" 
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+  crossorigin="anonymous">
 
   <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -17,14 +21,23 @@
   crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet" href="/assets/css/style.css"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link
+rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+/>
+
+<link rel='stylesheet' href="css/style.css">
 </head>
 <body>
   <div class="container">
     <div class="jumbotron">
-      <div class="Mntitle"><h1>Complexity Simplified</h1></div>
+      <div class="leadIn"><h1>Find Your Friend Survey</h1>
+      </div>
       <hr>
-      <h2 class="Mntitle">Then find the one with the greatest compatibility</h2>
+      <h3 class="leadIn">See who has the greatest compatibility</h3>
+      <h4 class="leadIn">Please submit the following form</h4>
     </div>
     <h2>Survey Questions</h2>
     <hr>
@@ -32,10 +45,11 @@
     <h4>Name (required)</h4>
     <input type="text" name="" id="name" class="form-control" required/>
     <h4>Link to photo image (required)</h4>
+    <!-- https://cms.qz.com/wp-content/uploads/2017/06/rtsos2n-e1498831908682.jpg?quality=75&strip=all&w=3200&h=1848 -->
     <input type="text" name="" id="photo" class="form-control" required/>
     <hr>
     <h3><strong>Question 1</strong></h3>
-    <h4>Do you risks and challenges excite you?</h4>
+    <h4>Do risks and challenges excite you?</h4>
     <select data-placeholder="" class="chosen-select" id="q1">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -65,7 +79,7 @@
       <option value="5">5 (Strongly Agree)</option>
     </select>
     <h3><strong>Question 4</strong></h3>
-    <h4>?</h4>
+    <h4>Do you like to party?</h4>
     <select data-placeholder="" class="chosen-select" id="q1">
       <option value=""></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -134,31 +148,103 @@
       <option value="4">4</option>
       <option value="5">5 (Strongly Agree)</option>
     </select>
-  <br>
-  <br>
-  <button
-    type="submit"
-    class="btn btn-primary btn-lg btn-block"
-    id="submit">
-    <i class="fa fa-check-circle" 
-    aria-hidden="true">
-    </i>
-    Submit
-  </button>
+    <br>
+    <br>
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg btn-block"
+      id="submit">
+      <i class="fa fa-check-circle" 
+      aria-hidden="true">
+      </i>
+      Submit
+    </button>
+    <hr>
 
-  <div>
-    <footer class="footer text-center">
-      <div class=container>
-        <p>
-          <a href="#">Portfolio</a>
-          <a href="claughter@gitub.io/portfolio/friend_finder">GitHub Repo</a>
-          <br>
-        </p>
+    <div id="resultsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            <h2 class="modal-title"></h2><strong>Best Match</strong></h2>
+          </div>
+  
+          <div class="modal-body">
+            <h2 id="matchName"></h2>
+            <img 
+              id="matchImg"
+              src= "https://via.placeholder.com/400x400"
+              alt="Your browser will not display this image."/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
       </div>
-    </footer>
     </div>
 
-  <script 
+    <script>
+      $('#submit').on('click', function() {
+        function validateForm() {
+          var isValid = true;
+          $(".form-control").each(function() {
+            if($(this).val() === "") isValid = false;
+          });
+          $(".chosen-select").each(function() {
+            if($(this).val() === "") isValid = false;
+          });
+          return isValid;
+        }
+        if(validForm() === true) {
+          var userData = {
+            name: $('#name').val(),
+            photo: $('#photo').val(),
+            scores: [
+              $('#q1').val(),
+              $('#q2').val(),
+              $('#q3').val(),
+              $('#q4').val(),
+              $('#q5').val(),
+              $('#q6').val(),
+              $('#q7').val(),
+              $('#q8').val(),
+              $('#q9').val(),
+              $('#q10').val()
+            ]
+          };
+          var currentURL = window.location.origin;
+
+          $.post(currentURL + '/api/friends', userData, function(data) {
+            $('#matchName').text(data.name);
+            $('#matchImg').attr('src', data.photo);
+            $('#resultsModal').modal('toggle');
+          });
+        } else {
+          alert("Please fill out all fields before submitting.")
+        }
+      });
+    </script>
+
+    <div style="text-align: center">
+      <a href="/api/friends"><small>API Friends List</small></a>
+      <a href="#"><small>|</small></a>
+      <a href="https://github.com/CLaughter/Friend-Finder.git"><small>GitHub Repo</small>
+      </a>
+    </div>
+
+  </div>
+
+  <section id="bottom">
+    <footer id="footer">
+      Copyright ©
+    </footer>
+  </section>
+
+  <!-- <script 
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
   crossorigin="anonymous">
@@ -169,7 +255,7 @@
   <script 
   src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
-  crossorigin="anonymous">
+  crossorigin="anonymous"> -->
   </script>
   
 </body>
