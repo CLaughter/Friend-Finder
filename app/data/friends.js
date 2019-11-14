@@ -2,22 +2,22 @@ var friends = [
   {
     name: "Howdie Doody",
     photo: "https://steemitimages.com/DQmPsE52BYPwy5Y8NX7T9fQsoEbxRAe6PLrJwPxV1EafgQ9/Howdy%20Doody%20%233%204x6.jpg",
-    score: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+    score: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
   },
   {
     name: "Heady Knobbs",
     photo: "https://2.bp.blogspot.com/-IU2wKePwPWA/TnECGk9am9I/AAAAAAAAPWQ/qes1sK_Dr3I/s1600/108321_2_468.jpeg",
-    score: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    score: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   },
   {
     name: "Heather Locklear",
     photo: "https://www.heywigs.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/e/heather_locklear_straight_100__remy_human_hair_wig.jpg",
-    score: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+    score: [2, 3, 4, 3, 5, 4, 4, 3, 2, 5]
   },
   {
     name: "Candy Cain",
     photo: "https://dailyiowan.com/wp-content/uploads/2018/08/TaylorNewby-metoo.jpg",
-    score: [8, 6, 4, 4, 7, 3, 2, 2, 1, 7, 6]
+    score: [8, 6, 4, 4, 7, 3, 2, 2, 1, 7]
   },
   {
     name: "Anna Wang-Holder",
@@ -41,4 +41,4 @@ var friends = [
   }
 ];
 
-module.export = friends
+module.exports = friends

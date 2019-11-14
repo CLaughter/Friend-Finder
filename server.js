@@ -1,9 +1,7 @@
 var express = require('express');
-// var http = require("http");
-// var fs = ("fs");
-// var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
+var fs = require('fs');
 
 // Tells node that we are creating an "express" server
 var app = express();
@@ -11,18 +9,16 @@ var app = express();
 // Sets an initial port either Heroku selected or, if not, developer specific
 var PORT = process.env.PORT || 8080;
 
-// Sets up the Express app to handle data parsing
-app.use (bodyParser.json());
+// Middleware sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({type: "application/vnd.api=json"}));
+app.use(bodyParser.json());
 
 /* ROUTER
 Points server to "route" files giving a "map" of how to respond when users visit or request data from various URLs. */
 app.use(express.static("app/public"));
 
-require("./apps/routes/apiRoute")(app);
-require("./apps/routes/htmlRoute")(app);
+require("./app/routing/apiRoutes")(app, path);
+require("./app/routing/htmlRoutes")(app, path);
 
 // LISTENER
 // The server effectively starts

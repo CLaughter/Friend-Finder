@@ -14,8 +14,13 @@ body {
   text-align: center;
 }
 
+.leadIn {
+  text-align: center;
+}
+
 #resultsModal img {
-  overflow: hidden;
+  z-index: 5;
+  /* overflow: hidden; */
   width: 500px;
 }
 
