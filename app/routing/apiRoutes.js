@@ -18,44 +18,23 @@ module.exports = function(app) {
   var userData = req.body;
   var userName = userData.name;
   var userScores = userData.score;
-
-  // var b = userScores.map(function(item) {
-  //   return parseInt(item, 10);
-  // });
-  // userData = {
-  //   name: req.body.name,
-  //   photo: req.body.photo,
-  //   scores: b
-  // };
-
-  // console.log("Name: " + userName);
-  // console.log("User Score: " + userScores);
-
-  // var sum = b.reduce((a, b) => a + b, 0);
-
-  // console.log("Sum of user's score " + sum);
   console.log("Best match friend difference " + bestMatch.friendDifference);
   console.log("=======================");
 
   for(var i = 0; i < friends.length; i++) {
     console.log(friends[i]);
     var totalDifference = 0;
-//     console.log("Total difference " + totalDifference);
-//     console.log("Best match friend difference " + bestMatch.friendDifference);
-// console.log(friends[i].score);
-//     var bFriendScore = friends[i].score.reduce((a, b) => a + b, 0);
-//     // console.log ("Total friend score " + bFriendScore);
-//     totalDifference += Math.abs(sub - bFriendScore);
-//     console.log("------------------------------> " + totalDifference); 
+    
     friends[i].score.forEach(function(number, index) {
       totalDifference += Math.abs(number - userScores[index]);
     })
     if(totalDifference <= smallestDiff) {
       bestMatch = friends[i];
+      smallestDiff = totalDifference;
     }
     console.log(totalDifference + " TotalDifference");
   }
-
+console.log(userName)
   console.log(bestMatch);
   console.log(friends);
   // friends.push(userData);
